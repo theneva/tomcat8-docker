@@ -22,6 +22,12 @@ RUN ln -s /opt/apache-tomcat-${TOMCAT_MAJOR_VERSION}.${TOMCAT_MINOR_VERSION}.${T
 
 ADD serverinfo.jar ${CATALINA_HOME}/lib/serverinfo.jar
 
+ADD deploy-and-run.sh /opt/apache-tomcat-${TOMCAT_VERSION}/bin/
+
+RUN chmod 755 /opt/apache-tomcat-${TOMCAT_VERSION}/bin/deploy-and-run.sh \
+  && rm -rf /opt/apache-tomcat-${TOMCAT_VERSION}/webapps \
+  && mkdir /opt/apache-tomcat-${TOMCAT_VERSION}/webapps
+
 WORKDIR $CATALINA_HOME
 
 EXPOSE 8080
